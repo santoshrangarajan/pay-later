@@ -285,19 +285,6 @@ public class CLIController  implements PayLaterController {
 	@Override
 	public CLIResponse processTotalDuesReportRequest(PayLaterRequest payLaterRequest) {
 		CLIResponse cliResponse = new CLIResponse();
-		PayLaterDuesReportRequest simplDuesReportRequest = (PayLaterDuesReportRequest)payLaterRequest;
-		Double dues = reportsService.processDuesReports(simplDuesReportRequest);
-		cliResponse.setContents(Double.toString(dues));
-		return cliResponse;
-	}
-
-
-
-
-
-	@Override
-	public CLIResponse processDuesReportRequest(PayLaterRequest payLaterRequest) {
-		CLIResponse cliResponse = new CLIResponse();
 		PayLaterTotalDuesReportRequest simplTotalDuesReportRequest = (PayLaterTotalDuesReportRequest)payLaterRequest;
 		List<User> userList = reportsService.processTotalDuesReport(simplTotalDuesReportRequest);
 		
@@ -309,6 +296,19 @@ public class CLIController  implements PayLaterController {
 	
 	    cliResponse.setContents(users);
 	    return cliResponse;
+	}
+
+
+
+
+
+	@Override
+	public CLIResponse processDuesReportRequest(PayLaterRequest payLaterRequest) {
+		CLIResponse cliResponse = new CLIResponse();
+		PayLaterDuesReportRequest simplDuesReportRequest = (PayLaterDuesReportRequest)payLaterRequest;
+		Double dues = reportsService.processDuesReports(simplDuesReportRequest);
+		cliResponse.setContents(Double.toString(dues));
+		return cliResponse;
 	}
 
 

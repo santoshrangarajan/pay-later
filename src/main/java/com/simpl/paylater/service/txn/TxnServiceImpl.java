@@ -41,7 +41,7 @@ public class TxnServiceImpl implements TxnService {
 		
 		//Double newCreditLimit = user.getCreditLimit() - amount;
 		//user.setCreditLimit(user.getCreditLimit());
-		user.setDues(amount);
+		user.setDues(user.getDues()+amount);
 		
 		payLaterRepository.addUser(user);
 		payLaterRepository.processTxn(payLaterTxn);
