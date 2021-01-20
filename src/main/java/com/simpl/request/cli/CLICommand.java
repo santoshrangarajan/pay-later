@@ -3,9 +3,9 @@ package com.simpl.request.cli;
 import java.util.Arrays;
 import java.util.List;
 
-import com.simpl.request.Request;
+import com.simpl.parser.Command;
 
-public class CLIRequest  implements Request {
+public class CLICommand  implements Command {
 
 	
 	//public  List<String> requestTypeList = Arrays.asList("");
@@ -15,7 +15,7 @@ public class CLIRequest  implements Request {
 	
 	
 	
-	public CLIRequest(String line) {
+	public CLICommand(String line) {
 		this.contents=line;
 		this.tokensList = Arrays.asList(line.split("\\s"));
 	}

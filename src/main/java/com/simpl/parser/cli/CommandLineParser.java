@@ -2,8 +2,8 @@ package com.simpl.parser.cli;
 
 import java.util.List;
 
-import com.simpl.request.Request;
-import com.simpl.parser.RequestParser;
+import com.simpl.parser.Command;
+import com.simpl.parser.CommandParser;
 import com.simpl.request.PayLaterDiscountReportRequest;
 import com.simpl.request.PayLaterDuesReportRequest;
 import com.simpl.request.PayLaterMerchantRequest;
@@ -13,20 +13,18 @@ import com.simpl.request.PayLaterTotalDuesReportRequest;
 import com.simpl.request.PayLaterTxnRequest;
 import com.simpl.request.PayLaterUserRequest;
 import com.simpl.request.PayLaterUsersCreditLimitReportRequest;
-import com.simpl.request.cli.CLIRequest;
 
-public class CommandLineParser implements RequestParser {
+public class CommandLineParser implements CommandParser {
 
 	
 
-	@Override
+	/*@Override
 	public PayLaterRequest parseRequest(Request request) throws Exception {
 		// TODO Auto-generated method stub
 		
 		CLIRequest clRequest = (CLIRequest)request;
 	    String contents = clRequest.getContents();
 	 
-	    
 	    if(contents.startsWith("new user")) {
 	    	return processNewUserRequest(clRequest);
 	    } else if (contents.startsWith("new merchant")) {
@@ -51,38 +49,38 @@ public class CommandLineParser implements RequestParser {
 	
 	   return null;
 	};
+	*/
 	
-	
-	private PayLaterRequest processDiscountReport(CLIRequest clRequest) throws Exception {
-		List<String> tokensList = clRequest.getTokensList();
+	public PayLaterRequest processDiscountReport(Command command) throws Exception {
+		List<String> tokensList = command.getTokensList();
 		PayLaterDiscountReportRequest simplNewDiscountReportRequest = new PayLaterDiscountReportRequest();
 		simplNewDiscountReportRequest.setMerchantName(tokensList.get(2));
 		
 		return simplNewDiscountReportRequest;
 	}
 	
-	private PayLaterRequest processDuesReport(CLIRequest clRequest) throws Exception {
-		List<String> tokensList = clRequest.getTokensList();
+	public PayLaterRequest processDuesReport(Command command) throws Exception {
+		List<String> tokensList = command.getTokensList();
 		PayLaterDuesReportRequest simplDuesReportRequest = new PayLaterDuesReportRequest();
 		simplDuesReportRequest.setUserName(tokensList.get(2));;
 		
 		return simplDuesReportRequest;
 	}
 	
-	private PayLaterRequest processTotalDuesReport(CLIRequest clRequest) throws Exception {
+	public PayLaterRequest processTotalDuesReport(Command command) throws Exception {
 		PayLaterTotalDuesReportRequest simplTotalDuesReportRequest = new PayLaterTotalDuesReportRequest();
 		return simplTotalDuesReportRequest;
 	}
 	
-	private PayLaterRequest processUsersCreditLimitReport(CLIRequest clRequest) throws Exception {
+	public PayLaterRequest processUsersCreditLimitReport(Command command) throws Exception {
 		PayLaterUsersCreditLimitReportRequest simplUsersCreditLimitReportRequest = new PayLaterUsersCreditLimitReportRequest();
 		return simplUsersCreditLimitReportRequest;
 	}
 	
 	
 	
-	private PayLaterRequest processNewMerchantRequest(CLIRequest clRequest) throws Exception {
-		 List<String> tokensList = clRequest.getTokensList();
+	public PayLaterRequest processNewMerchantCommand(Command command) throws Exception {
+		 List<String> tokensList = command.getTokensList();
 		 
 		 PayLaterMerchantRequest simplNewMerchantRequest = new PayLaterMerchantRequest();
 		 simplNewMerchantRequest.setName(tokensList.get(2));
@@ -92,8 +90,8 @@ public class CommandLineParser implements RequestParser {
 		return simplNewMerchantRequest;	 
 	}
 	
-	private PayLaterRequest processNewTxnRequest(CLIRequest clRequest) throws Exception {
-		 List<String> tokensList = clRequest.getTokensList();
+	public PayLaterRequest processNewTxnCommand(Command command) throws Exception {
+		 List<String> tokensList = command.getTokensList();
 		 
 		 PayLaterTxnRequest simplTxnRequest = new PayLaterTxnRequest();
 		 simplTxnRequest.setUserName((tokensList.get(2)));
@@ -104,8 +102,8 @@ public class CommandLineParser implements RequestParser {
 	}
 	
 	
-	 private PayLaterRequest processUpdateMerchantRequest(CLIRequest clRequest) throws Exception {
-		    List<String> tokensList = clRequest.getTokensList();
+	public PayLaterRequest processUpdateMerchantCommand(Command command) throws Exception {
+		    List<String> tokensList = command.getTokensList();
 		 
 		 	PayLaterMerchantRequest simplNewMerchantRequest = new PayLaterMerchantRequest();
 		 	simplNewMerchantRequest.setName(tokensList.get(2));
@@ -115,9 +113,9 @@ public class CommandLineParser implements RequestParser {
 		  return simplNewMerchantRequest;	 
 	   	}
 	 
-	private PayLaterRequest processNewUserRequest(CLIRequest clRequest) throws Exception {
+	public PayLaterRequest processNewUserCommand(Command command) throws Exception {
 				
-	     List<String> tokensList = clRequest.getTokensList();
+	     List<String> tokensList = command.getTokensList();
 	     
 	     PayLaterUserRequest simplNewUserRequest = new PayLaterUserRequest();
 	     simplNewUserRequest.setUserName(tokensList.get(2));
@@ -127,9 +125,9 @@ public class CommandLineParser implements RequestParser {
 	     return simplNewUserRequest;     
 	}
 	
-	private PayLaterRequest processPayRequestRequest(CLIRequest clRequest) throws Exception {
+	public PayLaterRequest processPayRequestCommand(Command command) throws Exception {
 		
-	     List<String> tokensList = clRequest.getTokensList();
+	     List<String> tokensList = command.getTokensList();
 	     
 	     PayLaterPaybackRequest simplPaybackRequest = new PayLaterPaybackRequest();
 	     simplPaybackRequest.setUserName(tokensList.get(1));

@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 import com.simpl.controller.PayLaterController;
 import com.simpl.controller.cli.CLIController;
-import com.simpl.parser.RequestParser;
+import com.simpl.parser.Command;
+import com.simpl.parser.CommandParser;
 import com.simpl.parser.cli.CommandLineParser;
 import com.simpl.paylater.repository.InMemoryRepositoryImpl;
 import com.simpl.paylater.repository.PayLaterRepository;
@@ -19,8 +20,7 @@ import com.simpl.paylater.service.txn.TxnServiceImpl;
 import com.simpl.paylater.service.user.UserService;
 import com.simpl.paylater.service.user.UserServiceImpl;
 import com.simpl.request.PayLaterRequest;
-import com.simpl.request.Request;
-import com.simpl.request.cli.CLIRequest;
+import com.simpl.request.cli.CLICommand;
 import com.simpl.response.SimplResponse;
 
 public class PayLaterCLIClient {
@@ -32,7 +32,7 @@ public class PayLaterCLIClient {
 	    ReportsService reportsService;
 	    ValidatationService validationService;
 	    PayLaterController payLaterController;
-	    RequestParser parser ;
+	    CommandParser parser ;
 
 	   public PayLaterCLIClient() {
 		    
@@ -52,8 +52,8 @@ public class PayLaterCLIClient {
 	            String line;
 	            while (!(line = input.nextLine()).isEmpty()) {
 	            	try {
-	            		Request request = new CLIRequest(line);
-	            		PayLaterRequest simplRequest = parser.parseRequest(request);
+	            		Command command = new CLICommand(line);
+	            		PayLaterRequest simplRequest = parser.parseRequest(command);
 						SimplResponse simplResponse = payLaterController.processRequest(simplRequest);
 						System.out.println(simplResponse.getContents());
 						
