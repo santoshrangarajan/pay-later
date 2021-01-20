@@ -1,8 +1,10 @@
 package com.simpl.paylater.repository;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.simpl.domain.Merchant;
@@ -11,9 +13,9 @@ import com.simpl.domain.User;
 
 public class InMemoryRepositoryImpl implements PayLaterRepository {
 
-	HashMap<String,User> userMap= new HashMap<String,User>();
-	HashMap<String,Merchant> merchantMap= new HashMap<String,Merchant>();
-	HashMap<String,PayLaterTxn> txnMap= new HashMap<String,PayLaterTxn>();
+	Map<String,User> userMap= Collections.synchronizedMap(new HashMap<String,User>());
+	Map<String,Merchant> merchantMap= Collections.synchronizedMap(new HashMap<String,Merchant>());
+	Map<String,PayLaterTxn> txnMap= Collections.synchronizedMap(new HashMap<String,PayLaterTxn>());
 	
 	@Override
 	public void addUser(User user) {
